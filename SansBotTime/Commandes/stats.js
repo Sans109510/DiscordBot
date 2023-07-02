@@ -70,7 +70,7 @@ module.exports = {
                     let sansletrouve = req[0].sansletrouve
                  
                     let Embed = new Discord.EmbedBuilder()
-                    .setColor("#FF0000")
+                    .setColor("#0099ff")
                     .setTitle(`${user.username}'s stats`)
                     .setDescription(`Voici les Stats de/d' ${user.username}`)
                     .setThumbnail(user.displayAvatarURL({dynamic: true}))

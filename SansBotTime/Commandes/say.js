@@ -25,7 +25,7 @@ module.exports = {
     ],
 
     async run(bot, message, args) {
-
+       
         if(message.user.id !== "754743152404856872") return message.reply({content: "Tu n'est pas la perssone qui peut utiliser la commande!", ephemeral: true})
         let say = args.getString("message")
 

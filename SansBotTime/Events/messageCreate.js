@@ -15,6 +15,26 @@ module.exports = async(bot, message) => {
             mentionable: false
         })
     }
+    let roleName2 = "giveawayxp";
+    let role2 = message.guild.roles.cache.find(x => x.name == roleName2);
+    if(!role2) {
+        message.guild.roles.create({
+            name: "giveawayxp",
+            permissions: "0",
+            position:"2",
+            mentionable: false
+        })
+    }
+    let roleName3 = "giveaway";
+    let role3 = message.guild.roles.cache.find(x => x.name == roleName3);
+    if(!role3) {
+        message.guild.roles.create({
+            name: "giveaway",
+            permissions: "0",
+            position:"3",
+            mentionable: false
+        })
+    }
 
     db.query(`SELECT * FROM server WHERE guild = '${message.guild.id}'`, async (err, req) => {
 

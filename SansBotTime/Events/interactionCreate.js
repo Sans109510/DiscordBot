@@ -19,6 +19,13 @@ module.exports = async (bot, interaction) => {
             await interaction.respond(entry === "" ? sortie.map(c => ({name: c, value: c})) : sortie.map(c => ({name: c, value: c})))
         }
 
+        if(interaction.commandName === "roles") {
+
+            let choices = ["add", "remove"]
+            let sortie = choices.filter(c => c.includes(entry))
+            await interaction.respond(entry === "" ? sortie.map(c => ({name: c, value: c})) : sortie.map(c => ({name: c, value: c})))
+        }
+
         if(interaction.commandName === "setstatus") {
 
             let choices = ["Listening", "Watching", "Playing", "Streaming", "Competing"]
@@ -89,6 +96,42 @@ module.exports = async (bot, interaction) => {
 
             await interaction.channel.delete()
 
+        }
+    }
+
+    if(interaction.isSelectMenu()) {
+
+        if(interaction.customId === "reactionrole") {
+
+            bot.db.query(`SELECT * FROM server WHERE guild = '${interaction.guildId}'`, async (err, req) => {
+
+                try {
+
+                    let roles = req[0].reactionrole.split(" ");
+                    if(roles.length <= 0) return;
+    
+                    await interaction.deferReply({ephemeral: true})
+    
+                    let retiredroles = [];
+                    let addroles = [];
+                    for(let i = 0; i < roles.length; i++) {
+                        if(interaction.member.roles.cache.has(roles[i]) && !interaction.values.includes(roles[i])) {
+                            await interaction.member.roles.remove(roles[i])
+                            await retiredroles.push(roles[i])
+                        }
+                    }
+                    for(let i = 0; i < interaction.values.length; i++) {
+                        await interaction.member.roles.add(interaction.values[i])
+                        await addroles.push(interaction.values[i])
+                    }
+    
+                    await interaction.followUp({content: `${addroles.length <= 0 ? "" : `Les rôles ${addroles.map(r => `\`${interaction.guild.roles.cache.get(r).name}\``).join(", ")} vous ont été ajouter.`} ${retiredroles.length <= 0 ? "" : `Les rôles  ${retiredroles.map(r => `\`${interaction.guild.roles.cache.get(r).name}\``).join(", ")} vous ont été retirés.`}`, ephemeral: true})
+
+                } catch(err) { 
+
+                    interaction.followUp({content: "une erreur ses produite veuiller ressayer!", ephemeral:true})
+                }
+            })
         }
     }
 }

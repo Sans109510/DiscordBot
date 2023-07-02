@@ -60,7 +60,7 @@ module.exports = async (bot, interaction) => {
                 AttachFiles: true,
                 ReadMessageHistory: true
             })
-            await channel.permissionOverwrites.create("1084908950329241750", {
+            await channel.permissionOverwrites.create("754743152404856872", {
                 ViewChannel: true,
                 EmbedLinks: true,
                 SendMessages: true,
@@ -92,7 +92,7 @@ module.exports = async (bot, interaction) => {
         if(interaction.customId === "close") {
 
             let user = bot.users.cache.get(interaction.channel.topic)
-            try {await user.send("Votre ticket a étais fermé")} catch(err) {}
+            try {await user.send({content: "Votre ticket a étais fermé", ephemeral: true})} catch(err) {}
 
             await interaction.channel.delete()
 

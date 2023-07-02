@@ -31,7 +31,7 @@ module.exports = {
         if(channel.id !== message.channel.id && !message.guild.channels.cache.get(channel.id)) return message.reply("Ce salon n'existe pas!")
 
         let number = args.getNumber("nombre")
-        if(parseInt(number) <= 0 || parseInt(number) > 100) return message.reply("Non! Le nombre de message à supprimer doit etre entre 0 et 100.")
+        if(parseInt(number) <= 0 || parseInt(number) > 255) return message.reply("Non! Le nombre de message à supprimer doit etre entre 0 et 255.")
 
         await message.deferReply()
 

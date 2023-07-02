@@ -29,7 +29,7 @@ module.exports = {
         try {
 
             let user = await bot.users.fetch(args._hoistedOptions[0].value)
-            if(!user) return message.reply("Tu a essayer de Ban un membre mais tu na pas réussie...")
+            if(!user) return message.reply("Tu a essayer de Ban un membre mais une erreur ses produite...")
             let member = message.guild.members.cache.get(user.id)
             
             let reason = args.getString("raison")
@@ -49,7 +49,7 @@ module.exports = {
 
         } catch (err) {
 
-            return message.reply("Tu a essayer de Ban un membre mais tu na pas réussie...")
+            return message.reply("Tu a essayer de Ban un membre mais une erreur ses produite...")
         }
     }
 }

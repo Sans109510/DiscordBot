@@ -10,7 +10,7 @@ module.exports = async bot => {
         if(err) console.log(err)
         console.log("Base de données connecté")
     })
-    bot.user.setActivity("Undertale Anti Chara", {type: Discord.ActivityType["Playing"]})
+    bot.user.setActivity("Undertale", {type: Discord.ActivityType["Playing"]})
 
     await loadSlashCommands(bot)
 

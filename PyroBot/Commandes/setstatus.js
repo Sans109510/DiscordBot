@@ -42,7 +42,7 @@ module.exports = {
        if(activity === "Streaming" && !args.getString("lien").match(new RegExp(/((http(s)?:\/\/)?(www\.)?twitch\.tv\/.*)/))) return message.reply("Indique une url Twitch")
        if(activity === "Streaming") await bot.user.setActivity(status, {type: Discord.ActivityType[activity], url: args.getString("lien")})
        else await bot.user.setActivity(status, {type: Discord.ActivityType[activity]})
-       await message.reply("Status mis à jour !")
+       await message.reply({content: "Status mis à jour !", ephemeral: true})
     }
 }
 
